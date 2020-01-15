@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+  <!-- <include
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        layout="@layout/item"
+        /> -->
+   <androidx.recyclerview.widget.RecyclerView
+       android:id="@+id/recView"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+
+      />
+    <!-- <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:orientation="horizontal"
+        android:gravity="right"
+        android:background="@color/colorPrimary"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:paddingRight="25dp"
+            android:paddingTop="10dp"
+            android:text="X" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rvArea"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:background="@color/colorAccent"
+        >
+        <ImageButton
+            android:id="@+id/imgPlay"
+            android:src="@drawable/baseline_play_arrow_black_36dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="Start"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+
+            />
+        <TextView
+            android:id="@+id/timerValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textSize="72sp"
+            />
+    </RelativeLayout>
+-->
+
+</LinearLayout>
