@@ -6,20 +6,21 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class TaskElement implements Runnable {
+    final Handler handler;
     private String name;
     private String timerValue;
     private boolean running;
     private int miliseconds;
-    private Handler handler;
+    private TextView item;
+
     public TaskElement(String name )
     {
         this.name = name;
         this.timerValue = "0:00:00";
-        this.running = false;
+        this.running = true;
         this.miliseconds = 0;
         this.handler = new Handler();
-        handler.post(this);
-        handler.postDelayed(this, 1000);
+
     }
 
     public String getName() {
@@ -33,6 +34,10 @@ public class TaskElement implements Runnable {
     {
         return this.getRunning();
     }
+    public void setRunning(boolean val)
+    {
+        this.running = val;
+    }
     public void setRunning()
     {
         this.running = !this.running;
@@ -45,22 +50,30 @@ public class TaskElement implements Runnable {
     {
         return this.miliseconds;
     }
+    public void setView(TextView tv)
+    {
+        this.item = tv;
+    }
 
+    public void StartTimmer()
+    {
+        this.handler.post(this);
+    }
 
     @Override
     public void run() {
-        int hours = this.getMiliseconds() / 3600;//000;
-        int minutes = (this.getMiliseconds() / 3600) % 60;
-        int sec = this.getMiliseconds() % 60;
+        int hours = this.getMiliseconds() / 3600000;//000;
+        int minutes = (this.getMiliseconds() % 3600000) / 60000;
+        int sec = (this.getMiliseconds() % 60000)/ 1000;
+
+
 
         String time = String.format("%d:%02d:%02d", hours, minutes, sec);
-        if (running) {
-            this.timerValue = time;
-        }
-        if (this.running) {
-            //miliseconds+=100;
-            this.miliseconds++;
 
+        if (running) {
+            this.item.setText(time);
+            this.setMiliseconds(this.getMiliseconds() + 100);
         }
+        this.handler.postDelayed(this, 100);
     }
 }

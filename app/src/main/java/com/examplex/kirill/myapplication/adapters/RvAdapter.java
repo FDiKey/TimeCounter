@@ -50,7 +50,7 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.RvHolder> {
     public int getItemCount() {
         return taskList.size();
     }
-    class RvHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class RvHolder extends RecyclerView.ViewHolder {
 
         private TextView name;
         private TextView timmerValue;
@@ -67,41 +67,37 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.RvHolder> {
             timmerValue = item.findViewById(R.id.timerValue);
             imgStop = item.findViewById(R.id.imgStop);
             rl = item.findViewById(R.id.rel);
-            item.setOnClickListener(this);
+
+
         }
 
 
 
 
-        public void bind(TaskElement taskElement)
+        public void bind(final TaskElement taskElement)
         {
             name.setText(taskElement.getName());
             timmerValue.setText(taskElement.getTimerValue());
-
-        }
-        private void runTimer(TaskElement taskElement) {
-            final Handler handler = new Handler();
-            handler.post(new Runnable() {
+            taskElement.setView(timmerValue);
+            taskElement.StartTimmer();
+            rl.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void run() {
-
+                public void onClick(View v) {
+                            taskElement.setRunning();
+                    }
+                });
+            imgStop.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    taskElement.setMiliseconds(0);
+                    taskElement.setRunning(false);
+                    timmerValue.setText("0:00:00");
+                    name.setText("text 123");
                 }
-            });
-
-        }
-        @Override
-        public void onClick(View v) {
-            switch(v.getId()){
-                case R.id.rel: {
-
-                 break;
-                }
+                });
 
             }
         }
-    }
-
-
 }
 
 
