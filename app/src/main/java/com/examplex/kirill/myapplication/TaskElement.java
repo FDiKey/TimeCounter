@@ -12,17 +12,27 @@ public class TaskElement implements Runnable {
     private boolean running;
     private int miliseconds;
     private TextView item;
+    private int taskId = -1;
 
     public TaskElement(String name )
     {
+
         this.name = name;
         this.timerValue = "0:00:00";
-        this.running = true;
+        this.running = false;
         this.miliseconds = 0;
         this.handler = new Handler();
 
     }
-
+    public void setTaskId(int i){
+        this.taskId = i;
+    }
+    public int getTaskId(){
+        if(this.taskId > -1) {
+            return this.taskId;
+        }
+        return -1;
+    }
     public String getName() {
         return this.name;
     }
@@ -75,5 +85,9 @@ public class TaskElement implements Runnable {
             this.setMiliseconds(this.getMiliseconds() + 100);
         }
         this.handler.postDelayed(this, 100);
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
