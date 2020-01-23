@@ -1,6 +1,7 @@
 package com.examplex.kirill.myapplication;
 
 
+import android.animation.LayoutTransition;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.PopupWindow;
 
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private PopupWindow popup;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         mActivity = MainActivity.this;
         rv = findViewById(R.id.recView);
         fab = findViewById(R.id.fab);
+
     }
 
     private void initTasks() {

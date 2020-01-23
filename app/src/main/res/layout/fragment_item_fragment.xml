@@ -1,36 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:id="@+id/card"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="wrap_content"
-    android:orientation="vertical"
+<RelativeLayout android:id="@+id/rel"
+    android:layout_width="match_parent"
+    android:layout_height="260dp"
     android:layout_margin="8dp"
-    android:animateLayoutChanges="true"
+    android:background="@color/colorAccent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     >
 
-    <RelativeLayout
-        android:id="@+id/rel"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:background="@color/colorAccent"
-        >
-
-        <ImageButton
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+        <ImageView
             android:id="@+id/popup"
+            android:layout_margin="12dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:src="@android:drawable/ic_menu_manage"
-            android:contentDescription="menu"
-            android:layout_margin="8dp"
-
+            android:contentDescription="@string/app_name"
             />
+
+
+
         <TextView
             android:id="@+id/taskName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="34sp"
-            android:layout_marginTop="18dp"
+            android:textSize="28sp"
+            android:text=""
+            android:maxLength="12"
+            android:layout_marginTop="54dp"
+            android:layout_marginStart="18dp"
+            android:layout_alignParentStart="true"
             android:layout_centerHorizontal="true" />
 
         <TextView
@@ -40,15 +42,23 @@
             android:text="@string/resettimer"
             android:textSize="58sp"
             android:layout_centerInParent="true" />
-
-        <ImageButton
+        <ImageView
+            android:id="@+id/imgAction"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerInParent="true"
+            android:src="@android:drawable/ic_media_pause"
+            android:visibility="invisible"
+            android:contentDescription="@string/app_name"/>
+        <ImageView
             android:id="@+id/imgStop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="StopClick"
-            android:src="@drawable/baseline_stop_black_36dp"
+            android:layout_marginBottom="18dp"
+            android:src="@drawable/round_replay_black_36dp"
             android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true" />
+            android:layout_alignParentBottom="true"
+            android:contentDescription="@string/app_name"/>
+
     </RelativeLayout>
 
-</LinearLayout>

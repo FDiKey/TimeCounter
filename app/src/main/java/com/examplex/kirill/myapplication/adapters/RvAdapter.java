@@ -7,8 +7,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -63,12 +66,12 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.RvHolder> {
 
         notifyDataSetChanged();
     }
-    public void upateItem(int position, String name)
+    private void upateItem(int position, String name)
     {
         taskList.get(position).setName(name);
         notifyItemChanged(position);
     }
-    public void deleteItem(int position)
+    private void deleteItem(int position)
     {
         taskList.remove(position);
         for(int i = 0; i < taskList.size(); i++)
@@ -78,38 +81,48 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.RvHolder> {
     }
 
 
-    class RvHolder extends RecyclerView.ViewHolder{
-
+    class RvHolder extends RecyclerView.ViewHolder implements Animation.AnimationListener{
+        //interface Views
         private TextView name;
         private TextView timmerValue;
-        private ImageButton imgStop;
-        private ImageButton popup;
+        private ImageView imgStop;
+        private ImageView popup;
         private RelativeLayout rl;
+        private ImageView imageAction;
+        //edit and delete dialogs
         private AlertDialog.Builder adEdit;
         private AlertDialog.Builder adDel;
         private LayoutInflater inflater;
+        //varriables for animation
+        private Animation anim;
+        private boolean start = false;
+        private final int idPause = android.R.drawable.ic_media_pause;
+        private final int idPlay = android.R.drawable.ic_media_play;
 
 
 
 
-
-        public RvHolder(@NonNull View item) {
+        private RvHolder(@NonNull View item) {
             super(item);
             name = item.findViewById(R.id.taskName);
             timmerValue = item.findViewById(R.id.timerValue);
             imgStop = item.findViewById(R.id.imgStop);
             rl = item.findViewById(R.id.rel);
+            rl.setBackgroundResource(R.drawable.card_style_view);
             popup = item.findViewById(R.id.popup);
+            imageAction = item.findViewById(R.id.imgAction);
             adEdit = new AlertDialog.Builder(item.getContext());
             adDel = new AlertDialog.Builder(item.getContext());
             inflater = LayoutInflater.from(item.getContext());
+            anim = AnimationUtils.loadAnimation(item.getContext(),R.anim.image_anim);
+            anim.setAnimationListener(this);
         }
 
 
 
 
 
-        public void bind(final TaskElement taskElement)
+        private void bind(final TaskElement taskElement)
         {
             name.setText(taskElement.getName());
             timmerValue.setText(taskElement.getTimerValue());
@@ -120,7 +133,10 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.RvHolder> {
             rl.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                            taskElement.setRunning();
+                    if (v.getId() == R.id.rel) {
+                                taskElement.setRunning();
+                                StartAnim(v);
+                            }
                     }
                 });
             imgStop.setOnClickListener(new View.OnClickListener() {
@@ -176,8 +192,41 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.RvHolder> {
             });
 
 
+
+        }
+
+        private void StartAnim(View view) {
+            if (start) {
+                imageAction.setImageResource(idPause);
+                imageAction.setVisibility(View.VISIBLE);
+                imageAction.startAnimation(anim);
+                imageAction.setVisibility(View.INVISIBLE);
+                start = !start;
+            } else
+            {
+                imageAction.setImageResource(idPlay);
+                imageAction.setVisibility(View.VISIBLE);
+                imageAction.startAnimation(anim);
+                imageAction.setVisibility(View.INVISIBLE);
+                start = !start;
             }
         }
+
+        @Override
+        public void onAnimationStart(Animation animation) {
+
+        }
+
+        @Override
+        public void onAnimationEnd(Animation animation) {
+
+        }
+
+        @Override
+        public void onAnimationRepeat(Animation animation) {
+
+        }
+    }
 
 
 
