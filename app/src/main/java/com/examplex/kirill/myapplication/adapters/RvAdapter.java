@@ -68,6 +68,7 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.RvHolder> {
     }
     private void upateItem(int position, String name)
     {
+
         taskList.get(position).setName(name);
         notifyItemChanged(position);
     }
@@ -127,13 +128,12 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.RvHolder> {
             name.setText(taskElement.getName());
             timmerValue.setText(taskElement.getTimerValue());
             taskElement.setView(timmerValue);
-            taskElement.StartTimmer();
 
 
-            rl.setOnClickListener(new View.OnClickListener() {
+            timmerValue.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (v.getId() == R.id.rel) {
+                    if (v.getId() == R.id.timerValue) {
                                 taskElement.setRunning();
                                 StartAnim(v);
                             }

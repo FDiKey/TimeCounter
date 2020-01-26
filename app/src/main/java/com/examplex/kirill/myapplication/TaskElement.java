@@ -1,8 +1,6 @@
 package com.examplex.kirill.myapplication;
 
 import android.os.Handler;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 public class TaskElement implements Runnable {
@@ -22,7 +20,7 @@ public class TaskElement implements Runnable {
         this.running = false;
         this.miliseconds = 0;
         this.handler = new Handler();
-
+        this.StartTimmer();
     }
     public void setTaskId(int i){
         this.taskId = i;
@@ -40,13 +38,9 @@ public class TaskElement implements Runnable {
     {
         return  this.timerValue;
     }
-    public boolean getRunning()
-    {
-        return this.getRunning();
-    }
     public void setRunning(boolean val)
     {
-        this.running = val;
+            this.running = val;
     }
     public void setRunning()
     {
@@ -65,9 +59,10 @@ public class TaskElement implements Runnable {
         this.item = tv;
     }
 
-    public void StartTimmer()
+    private void StartTimmer()
     {
         this.handler.post(this);
+
     }
 
     @Override
@@ -86,6 +81,8 @@ public class TaskElement implements Runnable {
         }
         this.handler.postDelayed(this, 100);
     }
+
+
 
     public void setName(String name) {
         this.name = name;
